@@ -21,7 +21,7 @@ layout: default
   var ldclient = window.LDClient.initialize(clientId, user);
 
   ldclient.on("ready", function() {
-    document.getElementById("preview").style.display = ldclient.variation(flagname, false) ? "block" : "none";
+    document.getElementById("preview").style.display = ldclient.variation(flagName, false) ? "block" : "none";
   });
 
   ldclient.on("change:" + flagName, function(newVal, prevVal) {

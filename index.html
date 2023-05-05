@@ -2,7 +2,7 @@
 layout: default
 ---
 <body>
-  <script src="https://unpkg.com/launchdarkly-js-client-sdk@2.18.1/dist/ldclient.min.js"></script>
+  <script src="https://unpkg.com/launchdarkly-js-client-sdk@3"></script>
   <h1>Testing git workflows</h1>
   
   <p>Adding the descriptions: Hot Fix</p>
@@ -16,15 +16,19 @@ layout: default
 
  <script>
   var clientId = "64547836f8835212eff12447";
-  var flagName = "course-preview";
-  var user = {anonymouse: true};
-  var ldclient = window.LDClient.initialize(clientId, user);
+  const flagKey = 'course-preview';
+  const context = {
+          kind: 'user',
+          key: 'example-context-key',
+          name: 'Sandy'
+        };
+  var ldclient = window.LDClient.initialize(clientId, context);
 
   ldclient.on("ready", function() {
-    document.getElementById("preview").style.display = ldclient.variation(flagName, false) ? "block" : "none";
+    document.getElementById("preview").style.display = ldclient.variation(flagKey, false) ? "block" : "none";
   });
 
-  ldclient.on("change:" + flagName, function(newVal, prevVal) {
+  ldclient.on("change:" + flagKey, function(newVal, prevVal) {
     document.getElementById("preview").style.display = newVal ? "block" : "none";
   });
 
